@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <h1>Dashboard - Piotr Jeka</h1>
+  <p>Witaj na swojej tablicy! Możesz <a href="{% url 'edit' %}">edytować swój profil</a> lub <a href="{% url 'password_change' %}">zmienić swoje hasło</a>.</p>
+{% endblock %}
