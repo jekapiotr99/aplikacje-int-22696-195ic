@@ -38,6 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'bookmarks.urls'
@@ -53,10 +54,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'bookmarks.wsgi.application'
 
@@ -123,20 +134,24 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '' # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '934609634152662' # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '1b645db43bd3682a57e2f36d97f64d2b' # Facebook App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
-SOCIAL_AUTH_TWITTER_KEY = '' # Twitter API Key
-SOCIAL_AUTH_TWITTER_SECRET = '' # Twitter API Secret
+SOCIAL_AUTH_TWITTER_KEY = 'uWwGrg3P1sH4vlQiS6Xagk0AD' # Twitter API Key
+SOCIAL_AUTH_TWITTER_SECRET = 'jcVx43xa7nMLDxd0ClWZF6RZmuuCqQ96ymR1LppS6mthwHZRCR' # Twitter API Secret
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '' # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '' # Google Consumer Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '544278548459-c982pv62ik3mcnjpopplpkqrva9he7cm.apps.googleusercontent.com' # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Consumer Secret
 
+SOCIAL_AUTH_GITHUB_KEY = '7a305c40efe4e358183a'
+SOCIAL_AUTH_GITHUB_SECRET = '26b522bc5ff8dd94a0ba83ea0d3ad44ce4d5d065'

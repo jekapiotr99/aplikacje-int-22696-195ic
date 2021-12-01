@@ -187,9 +187,66 @@ ul.messages li a.close {
     display:block;
     color:#fff;
 }
-.social li.facebook { background:#3b5399; }
-.social li.twitter { background:#00cffa; }
-.social li.google { background:#de1710; }
+.social .facebook { 
+    border: 2px solid #3b5399; 
+    border-radius: 3px;
+}
+.social .facebook:hover { 
+    border: 2px solid #3b5399; 
+    border-radius: 3px;
+    background: #3b5399;
+}
+.social .facebook:hover a {
+    color: white;
+}
+.social .facebook a {
+    color: #3b5399;
+}
+.social .google { 
+    border: 2px solid #EA4335; 
+    border-radius: 3px;
+}
+.social .google:hover { 
+    border: 2px solid #EA4335; 
+    border-radius: 3px;
+    background: #EA4335;
+}
+.social .google:hover a {
+    color: white;
+}
+.social .google a {
+    color: #EA4335;
+}
+.social .github { 
+    border: 2px solid #242222; 
+    border-radius: 3px;
+}
+.social .github:hover { 
+    border: 2px solid #242222; 
+    border-radius: 3px;
+    background: #242222;
+}
+.social .github:hover a {
+    color: white;
+}
+.social .github a {
+    color: #242222;
+}
+.social .twitter { 
+    border: 2px solid #354cd3; 
+    border-radius: 3px;
+}
+.social .twitter:hover { 
+    border: 2px solid #354cd3; 
+    border-radius: 3px;
+    background: #354cd3;
+}
+.social .twitter:hover a {
+    color: white;
+}
+.social .twitter a {
+    color: #354cd3;
+}
 
 
 /* images */
