@@ -1,4 +1,5 @@
 # aplikacje-int-22696-195ic
+
 ##3. Różne sposoby uwierzytelniania
 
 Link do strony na PaaS'ie:
