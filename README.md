@@ -1,37 +1,37 @@
 # aplikacje-int-22696-195ic
-##2. Rejestracja użytkowników
+##3. Różne sposoby uwierzytelniania
 
-Link do działającej strony z serwisem logowania: http://piotrjeka.pythonanywhere.com/
+Link do strony na PaaS'ie:
 
-Pierwszym widokiem który ujrzymy na stronie jest system logowania się użytkownika. Widoki dostępne z tej podstrony to: 
-rejstracja, logowanie lub przypominanie hasła. Podczas pierwszego odwiedzienia strony nie mamy żadnych uprawnień, 
-dlatego pierwszym krokiem będzie rejstracja.
-![obraz](https://user-images.githubusercontent.com/56678518/142683737-38220560-c8f9-4876-935f-cfc795dac12f.png)
+https://piotrjeka.pythonanywhere.com
 
-Pierwszy krok to rejstracja, po przejściu na widok rejstracji ujrzymy formularz. Po wypełnieniu pól takich jak username, 
-imię, nazwisko, email oraz hasło utworzy nam się nowe konto na stronie.
-![obraz](https://user-images.githubusercontent.com/56678518/142684442-3fe0840d-005d-461f-9631-8eb4dae3c0d7.png)
+Wybrane 3 sposoby logowania to:
+- Facebook
+- Google
+- Github
 
-Po wypełnieniu pól utworzy nam się konto. Następnym krokiem będzie logowanie się.
-![obraz](https://user-images.githubusercontent.com/56678518/142684632-eaa29ed9-2f05-49a3-8cd0-3539856c88b7.png)
+####Główny wygląd strony:
+![obraz](https://user-images.githubusercontent.com/56678518/144288857-a123e3ad-754e-41a5-8490-0cc31aeb89e5.png)
 
-Po zalogowaniu widzimy kolejny widok - edycja konta.
-![obraz](https://user-images.githubusercontent.com/56678518/142686239-4311bf45-8f61-4050-bf3a-bd94d07a0c97.png)
+##Facebook:
 
-Możemy tutaj zmienić email, imię, nazwisko. Możemy również dodać swoją datę urodzenia oraz dodać zdjęcie.
-![obraz](https://user-images.githubusercontent.com/56678518/142686893-64af8feb-c22a-4b2a-9c4e-1323b6ea9777.png)
+Problemy napotkane przy tworzeniu logowania za pomocą facebook:
+- wymagane było utworzenie certyfikatu prywatności ( autoryzacja wymagała protokołu https/ssl jako jedyna z 3 wybranych metod),
+- Rediret URI nie był wymagany podczas logowań na localhost'cie, natomiast gdy przeniosłem stronę na hosting PaaS, autoryzacja nie przekierowywała poprawnie.
 
-Drugim widokiem który możemy zobaczyć po zalogowaniu się jest widok do zmiany hasła. Po podaniu starego hasła oraz nowego dwukrotnie 
-nasze hasło zostanie zmienione.
-![obraz](https://user-images.githubusercontent.com/56678518/142687469-544e1077-a687-4a5d-90f5-718b1a244186.png)
+![obraz](https://user-images.githubusercontent.com/56678518/144289058-d0f1718f-b59a-4d89-8b5f-a794b0a431ed.png)
 
-Po wylogowaniu się, na ekranie logowania możemy również zobaczyć widok do przypomnienie hasła. Po podaniu maila, na naszą
-skrzynkę pocztową powinna przyjść wiadomość z linkiem do restartu hasła. W praktyce to nie zachodzi ponieważ nie mamy serwera
-pocztowego zaimplementowanego. Natomiast możemy tę funkcjonalość przetestować w konsoli.
-![obraz](https://user-images.githubusercontent.com/56678518/142687874-1ea96082-b5ab-4a01-bc1e-d5300b192689.png)
+##Google:
 
-W konsoli pojawi się link, który po odwiedzeniu przeniesie nas na stronę do resetowania hasła.
-![obraz](https://user-images.githubusercontent.com/56678518/142688834-fdbcb2ea-ae6f-4f1a-9e1d-96d40d1f52ee.png)
+Problemynapotkane przy tworzeniu logowania za pomocą google:
+- Najtrudniejsza konfiguracja API ( ilość pól do wypełnienia, wymaganie dodania API z biblioteki),
+- Najlepsza konfiguracja danych logowania ( możliwość dodawania wielu identyfikatorów na raz, każdy identyfikator może mieć wiele source'ów i callback'ów - co umożliwia konfiguracje jednocześnie na PaaS'ie i localhost'cie).
 
-Po odwiedzeniu linku ukaże nam się taka sama strona do resetowania hasła, jaką ujrzał użytkownik zalogowany.
-![obraz](https://user-images.githubusercontent.com/56678518/142688950-8b13ceb4-915e-4400-9945-d7e621004b53.png)
+![obraz](https://user-images.githubusercontent.com/56678518/144290373-5cad0530-4ef6-4b35-ae84-ca0043a5c793.png)
+
+##Github:
+
+Problemynapotkane przy tworzeniu logowania za pomocą google:
+- Najprostsza oraz najszybsza konfiguracja ze wszystkich,
+- Problematyczne odnalezenie api - trzeba wejść w ustawienia konta oraz wybrać ostatnią opcję (?). Wszystkie pozostałe serwisy społecznościowe mają dedykowaną stronę do swojego API, tutaj jest ten feature ukryty.
+![obraz](https://user-images.githubusercontent.com/56678518/144296042-2135a488-f5bc-4b6d-9cf9-4ec75192ab56.png)
