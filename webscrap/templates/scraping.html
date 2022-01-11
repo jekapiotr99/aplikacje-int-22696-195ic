@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" class="w40">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Podaj url:</label>
+        <input type="text" name="web_link" class="form-control" required placeholder="Url">
+    </div>
+    <div class="form-group">
+        <label>Podaj szukany element:</label>
+        <input type="text" class="form-control" name="element" required placeholder="Element">
+    </div>
+    <button type="submit" class="btn btn-dark">Wyszukaj</button>
+</form>
+
+<ul>
+    <li>Strona przeszukiwana: <a href = "{{web_link}}">{{web_link}}</a></li>
+    <li>Element poszukiwany: <span class="text-success">{{element}}</span></li>
+    <li>Liczba znalezionych elementów: {{amount}}</li>
+</ul>
+{% for elements in allElements %}
+<table style = "border-spacing: 10px; border-collapse: separate;"> 
+    <h3>Element nr. {{forloop.counter}} </h3>
+    <tr>
+        <td>Klasa = {{elements.findClass}},</td>
+        <td>ID = {{elements.findId}}, </td>
+        <td>Tekst = {{elements.getText}}</td>
+    </tr>  
+    <tr>
+        <td>Alt = {{elements.find_alt}}, </td>
+        <td>Span = {{elements.findSpan}}, </td>
+        {% if elements.findHref == 'Brak' %}
+        <td>Href = {{elements.findHref}} </td>
+        {% else %}
+        <td><a href="{{elements.findHref}}"></a><a>Href = {{elements.findHref}}</a></td>
+        {% endif %}
+    </tr>
+        
+    {% endfor %}
+</table>
+{% endblock %}

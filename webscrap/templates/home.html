@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h3>1.</h3>
+    <ul >
+        <li><span>{{second_p_text}}</span></li>
+        <a>Ilość elementów p: </a><span>{{all_p_tagslen}}</span>
+    </ul>
+</div>
+<div>
+    <h3>2.</h3>
+    {% for items in top_items  %}
+    <ul>
+        <li>{{items.title}} <br>
+            {{items.review}}</li>
+    </ul>
+    {% endfor %}
+</div>
+<div>
+    <h3>3.</h3>
+    {% for im in image_data %}
+    <ul>
+        <li>Src:  {{im.src}}</li>
+        <li>Alt:  {{im.alt}}</li>
+    </ul>
+    {% endfor %} <br>
+</div>
+<div>
+    <h3>4.</h3>
+    {% for produkt in all_products %}
+    <ul>
+        <li>{{produkt.name}} <br>
+            {{produkt.description}} <br>
+            {{produkt.price}} <br>
+            {{produkt.reviews}} <br>
+            {{produkt.image}}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}
