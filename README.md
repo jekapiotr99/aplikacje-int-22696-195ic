@@ -1,64 +1,60 @@
-# aplikacje-int-22696-195ic
+# Lab6 - Zezwolenia i wierzytelnianie w DRF.
 
-## 3. REST API z DRF
+Uwierzytelnianie w DRF pomoże nam zarządzać rejstracjami oraz logowaniami do naszego DRF'a. Wykorzystana biblioteka dj-rest-auth
+posiada wbudowane funkcjonalności do ułatwienia nam tego procesu.
 
-Po zainstalowaniu REST API za pomocą plików pakietu rest-framework w dalszym ciągu możemy korzystać z podstawowego panelu 
-administratora django. Dodane zostały takie modele jak: Posts, Groups, Users, Sites oraz Tokens. W celu sprawdzenia połączenia
-między django na naszym API możemy utworzyć post w adminie i zobaczyć jego wyświetlanie w panelu REST'a.
+![obraz](https://user-images.githubusercontent.com/56678518/150997498-294b517c-6bc3-4262-bdd1-9a26280f8d15.png)
 
-![obraz](https://user-images.githubusercontent.com/56678518/146564093-32827858-4e82-4b8d-9354-12113922d427.png)
+Poprawne wykonanie rejestracji pokaże nam token autoryzacji oraz w konsoli zobaczymy wiadomość z potwierdzeniem maila.
 
-Po przejściu do panelu REST'a za pomocą ścieżki : /api/v1 ,możemy zobaczyć, że lista obiektów postów jest pusta - 
-co sugerują pusty klamry JSON'a. Po dodaniu nowego posta za pomocą django admina możemy zobaczyć, że dodany został nowy wpis.
-![img](https://user-images.githubusercontent.com/56678518/146564021-36973c22-c9ec-4ecd-b30c-a0d323f8a4ea.png)
-
-Widzimy wszystkie wpisane przez nas informacje, przy czym dodana została nowa zmienna Obiektu - created_at pobierająca datę utworzenia obiektu
-![obraz](https://user-images.githubusercontent.com/56678518/146563996-62200e8d-e3c8-4946-af2c-75e15ddf5566.png)
-
-Możemy również dodawać posty w panelu API. Pokazane są te same pola co w podstawowym panelu Django, ale również możemy zmienić
-zakładkę na "Raw data" i wpisywać dane w formacie JSON.
-
-![obraz](https://user-images.githubusercontent.com/56678518/146564227-6dd8fb5d-72f3-44fc-ad3b-cb3c3b8f9d2d.png)
-
-Odświeżenie strony skutkuje wylistowaniem wszystkich obiektów tej klasy w formacie JSON.
-![obraz](https://user-images.githubusercontent.com/56678518/146564757-bb469005-1c99-4462-8722-58c6970a6706.png)
-
-Możemy również podejrzeć dane za pomocą przycisku: GET -> json. Pozwoli nam to otworzyć nowe okno z wypisanymi
-danymi odnośnie naszych obiektów.
-![obraz](https://user-images.githubusercontent.com/56678518/146565212-6809bcde-56bd-46ca-87fa-eab38b12b97e.png)
-
-Po zainstalowaniu pakietu dj-rest-auth mamy 2 sposoby dodawania użytkowników - piotr2 zostanie dodany za pomocą UserList
-za pomocą ścieżki /api/v1/users - użytkownikowi będziemy mogli nadać tylko i wyłącznię nazwę. 
-![obraz](https://user-images.githubusercontent.com/56678518/146566711-e1c94897-c995-405e-b42e-c047fb087fc4.png)
-Gdy podejrzymy dane za pomocą panelu admina możemy zobaczyć, że konto to nie ma ustawionego hasła:
-
-Użytkownik Piotr3 zostanie dodany drugim sposobem - z wykorzystaniem nowo zainstalowanego pakietu dj-rest-auth, za pomocą ścieżki: 
-/api/v1/dj-rest-auth/registration przechodzimy do widoku który pozwoli nam na wpisanie wszystkich pól, które były uwzględnione w 
-podstawowym panelu administratora.
-![obraz](https://user-images.githubusercontent.com/56678518/146572745-7885e578-9b31-4788-9b3e-54f305f61263.png)
-
-Po zatwierdzeniu formularza wyświetlony zostanie token oraz mail z potwierdzeniem konta:
-![img](https://user-images.githubusercontent.com/56678518/146571427-3832d64d-16b9-46a9-90d1-6a1e727ba7b2.png)
+![obraz](https://user-images.githubusercontent.com/56678518/151000405-3b56fdfe-c64b-46c2-8d0e-729c8b2f3d69.png)
 ![obraz](https://user-images.githubusercontent.com/56678518/146572117-86366999-60f1-4896-8a87-4be6f56e91a6.png)
 
-Możemy porównać hasła użytkowników piotr2 i piotr3. Jak widzimy, hasło stworzone za pomocą rest-auth jest automatycznie
-zabezpieczione algorytmami szyfrowania.
-![obraz](https://user-images.githubusercontent.com/56678518/146573499-fcdbf404-addb-4529-96c5-fa35e6b99b57.png)
+### Cookies
 
-Możemy teraz wylogować się z konta administratora i zalogować się na innego użytkownika.
+Aby sprawdzić działanie cookies utworzyłem nową podstronę w projekcie. Dodajemy najpierw ścieżkę do naszego pliku `urls.py`
 
-![obraz](https://user-images.githubusercontent.com/56678518/146571398-dbdd1d01-4106-4f5f-825d-915819f13e2d.png)
+![obraz](https://user-images.githubusercontent.com/56678518/151001768-d4b190a4-96b9-45b4-b434-54539b43b47d.png)
 
-Po poprawnym zalogowaniu możemy zobaczyć, że wszystkie funkcje są nadal dostępne.
-![obraz](https://user-images.githubusercontent.com/56678518/146566249-20c12c15-8a07-48f9-990a-effcc538bcac.png)
+Następnie korzystając z poradnika implementujemy w nowym pliku `views.py` metodę zarządzającą cookies. <br>
+Metoda ta sprawdza, czy istnieją już nasze pliki cookies (strona była kiedyś odwiedzana), a następie:
+- jeśli cookies istnieją
+  - to edytujemy ostatnią wizytę na aktualną datę i godzinę,
+  - jeśli minął dzień od ostatniej wizyty, zwiększamy ilość wizyt
+- jeśli zmienna mówiąca metodzie, że zmieniamy ostatną wizytę jest true, to ustawiamy cookies na nowe wartości
 
-Za pomocą ścieżki /redoc możemy podejrzeć dokumentacje naszego API. Możemy testować oraz przeglądać utworzone przez nas
-funkcje REST'a
-![obraz](https://user-images.githubusercontent.com/56678518/146566985-3a0e0f7c-169c-444d-a1d6-f8a8288fdd01.png)
+![obraz](https://user-images.githubusercontent.com/56678518/151002087-ffd13eb9-098c-4804-8f54-6eba328c91ef.png)
 
-Tak samo za pomocą ścieżki /swagger możemy podejrzeć inną dokumentację naszego projektu.
-![obraz](https://user-images.githubusercontent.com/56678518/146567071-b67e2c80-37b1-4c63-941a-001ee4bd5fb9.png)
+Aby podejrzeć cookies w naszej przeglądace, przechodzimy do podstrony /cookie/ i w narzędziach dla programisty w zakładce dane wybieramy "Ciasteczka".
+Na nw screenie, widać, że ostatnia wizyta była o godzinie 15:03 dnia 25-01-2022, a ilość wizyt wynosi 1. Jeśli poczekamy dzień i ponownie odwiedzimy naszą
+stronę, to wskaźnik wizyt się zwiększy.
 
-Pakiet rest_framework posiada w sobie wbudowane filtry, aby z nich korzystać należy je zaimportować. 
-![obraz](https://user-images.githubusercontent.com/56678518/146574440-d764c90f-a965-485d-b240-af2b032d73dd.png)
+![obraz](https://user-images.githubusercontent.com/56678518/151002995-f4ad8c6e-21a4-47df-bd8b-3fc2adc24006.png)
+
+### Filtrowanie i wyszukiwanie
+
+
+![obraz](https://user-images.githubusercontent.com/56678518/151005145-38873074-04c8-40b8-a8e3-1210c3daedb6.png)
+
+Po wybraniu filtrowania możemy zobaczyć, że strona się odświeżyła, a pasek adresu, jak i metoda GET nad spisem Postów się zmieniła.
+Dodane zostało zapytanie, które filtruje nasze posty względem "-id", co oznacza, że kolejność jest ustawiana względem id w odwrotnej kolejności.
+
+![obraz](https://user-images.githubusercontent.com/56678518/151005234-ed724d53-a618-4f38-8dc0-d50842b318b0.png)
+
+Po dodaniu filtrowania do strony, kolejnym elementem który możemy dodać jest funkcja wyszukiwania postów.
+
+![obraz](https://user-images.githubusercontent.com/56678518/151005824-c894aaa9-1104-444c-8d8e-b7022918e49c.png)
+
+Wpisanie w polu tekstowym szukanej frazy ponownie odświeży stronę i tym razem dodane zostało słowo kluczowe "search", które wskazuje
+że metodą filtrowania było wyszukanie frazy.
+![obraz](https://user-images.githubusercontent.com/56678518/151005762-4aa40037-b53c-443f-9094-2cd885e2b9c6.png)
+
+Aby upewnić się w jaki sposób działa to wyszukiwanie dodałem 4 post którego tytułem było słowo "Lorem".
+
+![obraz](https://user-images.githubusercontent.com/56678518/151006307-5f820b63-e9ab-4945-84bc-fc6cfd5dd277.png)
+
+Słowo to również było pierwszym wyrazem użytym w "body" pierwszego Postu. Po ponownym użyciu pola `Search` możemy zobaczyć
+,że filtrowanie odbywa się wyłącznie na tytułach naszych postów, a część "body" nie jest brana pod uwagę.
+
+![obraz](https://user-images.githubusercontent.com/56678518/151006652-d46ff449-4504-4077-a085-5db3cfec9002.png)
 

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from . import views
 from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -18,6 +19,7 @@ schema_view = get_schema_view(
     )
 
 urlpatterns = [
+    path('cookie/', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('api/v1/', include('posts.urls')),
     path('api-auth/', include('rest_framework.urls')),

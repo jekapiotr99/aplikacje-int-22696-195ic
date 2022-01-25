@@ -4,6 +4,8 @@ from rest_framework import filters
 from .models import Post
 from .permissions import IsAuthorOrReadOnly
 from .serializers import PostSerializer, UserSerializer
+from datetime import datetime
+from django.shortcuts import render
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -12,6 +14,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title']
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
