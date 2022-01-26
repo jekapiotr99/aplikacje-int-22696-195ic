@@ -1,4 +1,4 @@
-# Lab6 - Zezwolenia i wierzytelnianie w DRF.
+# Lab6 - Zezwolenia i uwierzytelnianie w DRF.
 
 Uwierzytelnianie w DRF pomoże nam zarządzać rejstracjami oraz logowaniami do naszego DRF'a. Wykorzystana biblioteka dj-rest-auth
 posiada wbudowane funkcjonalności do ułatwienia nam tego procesu.
