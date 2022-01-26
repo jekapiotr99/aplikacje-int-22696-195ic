@@ -1,30 +1,37 @@
-#### Integracja Django3 z Vue.js 3 - CRUD
-- projekt bazuje na [artykule](https://www.bezkoder.com/django-vue-js-rest-framework/) (zarys projektu):  
-  - część [backendowa](https://www.bezkoder.com/django-crud-mysql-rest-framework/),  
-  - część [frontendowa](https://www.bezkoder.com/vue-3-crud/), 
-  - idea działania:  
-  ![obrazek](https://www.bezkoder.com/wp-content/uploads/2020/03/django-vue-js-tutorial-rest-framework-crud-architecture.png)
-  
-##### Backend
-- architektura:  
-![obrazek](https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-archirecture.png)
-- utworzenie i aktywacja środowiska wirtualnego,  
-- instalacja Django 3.2.10 (LTS) oraz DRF,  
-- utworzenie nowego projektu ('django_backend' tu na repo) i aplikacji 'tutorials',  
-- dodanie wpisu o DRF w 'INSTALLED_APPS',  
-- obsługa [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (instalacja pakietu oraz wpisy w pliku 'settings.py',  
-- dodanie modelu Tutorial oraz 2-etapowa migracja,  
-- utworzenie serializera dla modelu Tutorial,  
-- utworzenie pliku 'urls.py' w aplikacji 'tutorials' oraz dodanie wpisu o tychże adresach w głównym pliku 'urls.py',  
-- utworzenie widoków dla:
-  - listy tutoriali,  
-  - szczegółów tutoriala,  
-  - listy opublikowanych tutoriali.  
+### Django + React (aplikacja CRUD)
 
-##### Frontend
-- architektura:  
-![obrazek](https://www.bezkoder.com/wp-content/uploads/2021/04/vue-3-crud-example-axios-router-app-diagram.png)
-- instalacja `node.js` i 'vue-cli',   
-- utworzenie aplikacji 'vue_frontend' za pomocą `vue-cli`,  
-- instalacja pakietów (np. za pomocą `npm`),  
-- cały frontend jest [tutaj](https://github.com/bezkoder/vue-3-crud/tree/master/src),  
+Widok startowy strony:
+
+![obraz](https://user-images.githubusercontent.com/56678518/151056943-9a85803c-a80d-4af5-aa9a-10d547834012.png)
+
+Na stronie zostały dodane 4 wpisy do zaprezentowania funkcjonalności. Aplikacja po stronie klienta działa na porcie
+8081, natomiast backend działa na porcie 8000. Możemy te dane podejrzeć również w podglądzie JSON'a:
+
+![obraz](https://user-images.githubusercontent.com/56678518/151057162-676105bf-9f21-482f-b362-ccdecfd41ec0.png)
+
+Połączenie axios w pliku http-common.js:
+
+![obraz](https://user-images.githubusercontent.com/56678518/151057274-7a40159f-078d-4262-ae44-991246539812.png)
+
+#### Modyfikacje kodu
+
+Najważniejszą modyfikacją jest usunięcie komponentu 'Tutorial.vue'. Zastąpiony zostanie modalem, zaprezentowanym później.
+Dodanie kolejnej podstrony do modyfikacji wydawało się staromodne i zastąpiłem to bardziej eleganckim rozwiązaniem.
+
+Wybrany element podświetla się, usunięty został podgląd z prawej strony, natomiast zostały dodane 2 ikony służące jako przyciski.
+Opcja usuwania z prawego panelu została przeniesona do funkcji wykonywanej po wciśnięciu przycisku kosza (ikony po lewej).
+![obraz](https://user-images.githubusercontent.com/56678518/151058749-dc873a94-1406-4dd3-a203-4a88c0c213c7.png)
+
+Druga ikona otwiera nam modal(okienko na styl popup), które zawiera wszystkie informacje do edycji.
+
+![obraz](https://user-images.githubusercontent.com/56678518/151060575-5811faf8-f131-4544-919d-600fb320f68f.png)
+
+Okienko modalu prezentuje się w ww. sposób. Tytuł i opis będzie automatycznie aktualizowany. Zamknięcie modalu zaktualizuje dane w bazie danych.
+
+Na górze znajduje się pasek wyszukiwania, który sortuje po tytułach.
+
+![obraz](https://user-images.githubusercontent.com/56678518/151070150-6df6fd7a-1be4-49d3-90ec-e003312a0187.png)
+
+Widok po posortowaniu.
+
+![obraz](https://user-images.githubusercontent.com/56678518/151070283-99c8d865-c224-4996-a187-a42274d4bcce.png)
